@@ -17,6 +17,9 @@ module.exports =
   sass:
     src : "#{src}/sass/*.{sass, scss}"
     dest: dest
+    settings:
+      sourceComments: 'map'
+      imagePath: '/images'
 
   scripts:
     src : "#{src}/javascript/**/*.js"
@@ -38,7 +41,15 @@ module.exports =
     dest:"#{dest}"
 
   browserify:
-    entries: ["#{src}/javascript/app.coffee"]
+    debug: true
     extensions: ['.coffee', '.hbs']
-    bundleName: "app.js"
     dest: dest
+    bundleConfigs: [{
+      entries: "#{src}/javascript/app.coffee"
+      dest: dest
+      outputName: 'app.js'
+    }, {
+      entries: "#{src}/javascript/head.coffee"
+      dest: dest
+      outputName: 'head.js'
+    }]
